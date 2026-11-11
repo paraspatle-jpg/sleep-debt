@@ -1,6 +1,6 @@
-# sleepy-reviewer 😴
+# sleep-debt 😴
 
-**An AI code reviewer that gets meaner the less you sleep.**
+**An AI code reviewer that gets meaner the less you sleep.** Your sleep debt becomes review debt.
 
 You log how many hours you slept. When you open a PR, a GitHub bot reviews it with Claude, and your sleep decides who shows up.
 
@@ -12,7 +12,7 @@ You log how many hours you slept. When you open a PR, a GitHub bot reviews it wi
 >
 > "I'd like to go back to bed. Fix these first."
 
-[Try the demo →](https://www.paraspatle.in/projects/sleepy-reviewer)
+[Try the demo →](https://www.paraspatle.in/projects/sleep-debt)
 
 ## Who reviews you
 
@@ -36,7 +36,7 @@ Whoever shows up, every comment has to point at a real bug or nitpick in your di
    ```bash
    gh secret set ANTHROPIC_API_KEY --repo you/your-repo
    ```
-2. **Add the workflow.** Copy [`examples/sleepy-reviewer.yml`](examples/sleepy-reviewer.yml) to `.github/workflows/` and set your timezone.
+2. **Add the workflow.** Copy [`examples/sleep-debt.yml`](examples/sleep-debt.yml) to `.github/workflows/` and set your timezone.
 3. **Log your sleep every morning.** Clone this repo, then:
    ```bash
    python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
@@ -54,10 +54,10 @@ The bot posts as `github-actions[bot]`, so it can actually **request changes** o
 From inside any repo, on the branch you want reviewed:
 
 ```bash
-python /path/to/sleepy-reviewer/review.py                    # uses today's logged sleep
-python /path/to/sleepy-reviewer/review.py --sleep 4 --hour 3 # dad mode
-python /path/to/sleepy-reviewer/review.py --pr 42            # post it on PR #42 (needs `gh`)
-python /path/to/sleepy-reviewer/review.py --dry-run          # show the mood, skip the API call
+python /path/to/sleep-debt/review.py                    # uses today's logged sleep
+python /path/to/sleep-debt/review.py --sleep 4 --hour 3 # dad mode
+python /path/to/sleep-debt/review.py --pr 42            # post it on PR #42 (needs `gh`)
+python /path/to/sleep-debt/review.py --dry-run          # show the mood, skip the API call
 ```
 
 ## How it works

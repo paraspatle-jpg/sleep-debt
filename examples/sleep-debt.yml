@@ -1,5 +1,5 @@
-# Copy to .github/workflows/sleepy-reviewer.yml in your repo.
-name: sleepy reviewer
+# Copy to .github/workflows/sleep-debt.yml in your repo.
+name: sleep debt
 
 on:
   pull_request:
@@ -18,7 +18,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}  # your real commit, so the commit hour is yours
           fetch-depth: 0
 
-      - uses: paraspatle-jpg/sleepy-reviewer@v1
+      - uses: paraspatle-jpg/sleep-debt@v1
         with:
           anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
           sleep-hours: ${{ vars.SLEEP_HOURS }}
