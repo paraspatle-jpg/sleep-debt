@@ -1,0 +1,26 @@
+# Copy to .github/workflows/sleepy-reviewer.yml in your repo.
+name: sleepy reviewer
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}  # your real commit, so the commit hour is yours
+          fetch-depth: 0
+
+      - uses: paraspatle-jpg/sleepy-reviewer@v1
+        with:
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+          sleep-hours: ${{ vars.SLEEP_HOURS }}
+          sleep-date: ${{ vars.SLEEP_DATE }}
+          timezone: Asia/Kolkata

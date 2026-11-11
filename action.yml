@@ -1,0 +1,47 @@
+name: Sleepy Reviewer
+description: An AI code reviewer that gets meaner the less you sleep.
+author: paraspatle-jpg
+branding:
+  icon: moon
+  color: purple
+
+inputs:
+  anthropic-api-key:
+    description: Anthropic API key (store it as a repo secret).
+    required: true
+  sleep-hours:
+    description: Hours you slept last night. Usually `vars.SLEEP_HOURS`, set by `sleep.py log`.
+    required: false
+    default: ""
+  sleep-date:
+    description: Date the hours were logged for (YYYY-MM-DD). If it isn't today, you count as unlogged and HR gets involved.
+    required: false
+    default: ""
+  timezone:
+    description: Your timezone, so "today" matches the day you logged your sleep (e.g. Asia/Kolkata).
+    required: false
+    default: UTC
+  github-token:
+    description: Token used to post the review.
+    required: false
+    default: ${{ github.token }}
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - shell: bash
+      run: pip install -q -r "${{ github.action_path }}/requirements.txt"
+
+    - shell: bash
+      env:
+        ANTHROPIC_API_KEY: ${{ inputs.anthropic-api-key }}
+        GH_TOKEN: ${{ inputs.github-token }}
+        SLEEP_HOURS: ${{ inputs.sleep-hours }}
+        SLEEP_DATE: ${{ inputs.sleep-date }}
+        TZ: ${{ inputs.timezone }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+      run: python "${{ github.action_path }}/review.py" --pr "$PR_NUMBER"
