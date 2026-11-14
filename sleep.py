@@ -43,6 +43,12 @@ def push_to_bot(hours: float, day: str) -> None:
         )
         print(f"  {'told' if ok else 'FAILED to tell'} the bot on {repo.strip()}")
 
+    # Optional: mirror the whole log to a gist, so a website can read it (SLEEPY_GIST=<gist id>).
+    gist = os.environ.get("SLEEPY_GIST")
+    if gist:
+        ok = subprocess.run(["gh", "gist", "edit", gist, "-f", LOG.name, str(LOG)], capture_output=True).returncode == 0
+        print(f"  {'updated' if ok else 'FAILED to update'} the gist")
+
 
 def main() -> None:
     p = argparse.ArgumentParser(description="manual sleep log")
