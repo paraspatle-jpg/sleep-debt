@@ -44,6 +44,7 @@ Whoever shows up, every comment has to point at a real bug or nitpick in your di
    .venv/bin/python sleep.py log 5.5       # sets SLEEP_HOURS / SLEEP_DATE on each repo via `gh`
    .venv/bin/python sleep.py               # your last 7 nights
    ```
+   Want a website to read your sleep too? `gh gist create sleep.json`, then `export SLEEPY_GIST=<gist id>` and every `log` updates it. (My site reads mine: short night, droopy website.)
 
 Every PR you open or push to now gets reviewed. If you forget to log, HR handles it.
 
